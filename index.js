@@ -54,8 +54,6 @@ bot.on("guildMemberRemove", function(member) {
 });
 
 bot.on("message", async function(message) {
- 
-    if (message.channel.name === "demande_de_roles") return message.delete()
 
     if (message.author.equals(bot.user)) return;
 
