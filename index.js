@@ -105,7 +105,7 @@ bot.on("message", async function(message) {
 
     const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
     
-    if (message.channel.name === "demande_de_roles") return message.delete()
+    if (message.channel.id === "318120793915523072") return message.delete()
     switch (args[0].toLowerCase()) {
         case "call":     
 function roll() {
