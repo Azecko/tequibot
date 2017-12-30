@@ -14,8 +14,6 @@ var bot = new Discord.Client();
 
 const modrole = "Modérateur";
 
-const TOKEN = "Mzk2NTk4NjY5NDA4ODYyMjA4.DSjzQg.OwRhu4zXJhEQkbl_6DatCSkLTqo"
-
 var client = new Discord.Client();
 
 const youtube = new YouTube("AIzaSyDE684AY4Th50yKvN7lZ9GroJiFvF5yjy8");
@@ -496,4 +494,4 @@ var embed = new Discord.MessageEmbed()
 serverQueue.textChannel.send(embed)
 }
 
-bot.login(TOKEN);
+bot.login(process.env.TOKEN);
