@@ -207,12 +207,13 @@ function roll() {
         member.guild.channels.find("name", "tequilog").send(embed);
         break;
         case "rank":
+        if (message.channel.name != "demande_de_roles") return message.delete()
         if (message.member.roles.find("name", "Abonnés")) {
-            message.channel.send("Tu possèdes déjà le role `Abonnés` !");
+            message.delete()
         return;
         }
-            if (message.channel.name != "demande_de_roles") return message.delete()
             member.addRole(rolesub)
+            message.delete()
             var embed = new Discord.MessageEmbed()
             .addField("Action :", "Ajout du role abonnés à un utilisateur")
             .addField("Abonnés :", message.author.toString())
