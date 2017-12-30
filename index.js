@@ -59,8 +59,6 @@ bot.on("message", async function(message) {
 
     if (!message.content.startsWith(PREFIX)) return;
     
-    if (message.channel.name === "demande_de_roles") return message.delete()
-    
     if (message.channel.type === "dm") return message.reply("Salut " + message.author.username + ", je suis désolé mais je ne peux pas répondre en MP.");
 
     var args = message.content.substring(PREFIX.length).split (" ");
@@ -106,6 +104,8 @@ bot.on("message", async function(message) {
     const serverQueue = queue.get(message.guild.id);
 
     const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+    
+    if (message.channel.name === "demande_de_roles") return message.delete()
     switch (args[0].toLowerCase()) {
         case "call":     
 function roll() {
