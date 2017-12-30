@@ -211,6 +211,7 @@ function roll() {
             message.channel.send("Tu possèdes déjà le role `Abonnés` !");
         return;
         }
+            if (message.channel.name != "demande_de_roles") return message.delete()
             member.addRole(rolesub)
             var embed = new Discord.MessageEmbed()
             .addField("Action :", "Ajout du role abonnés à un utilisateur")
