@@ -59,7 +59,7 @@ bot.on("message", async function(message) {
 
     if (!message.content.startsWith(PREFIX)) return;
     
-    if (message.channel.name = "demande_de_roles") return message.delete()
+    if (message.channel.name === "demande_de_roles") return message.delete()
     
     if (message.channel.type === "dm") return message.reply("Salut " + message.author.username + ", je suis désolé mais je ne peux pas répondre en MP.");
 
