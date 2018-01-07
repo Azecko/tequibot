@@ -158,6 +158,7 @@ bot.on("message", async function(message) {
            if(!args2[0]) return message.channel.send("Tu as oublié le numéro de la demande.")
            if(!member.guild.channels.find("name", `call-${args2[0]}`)) return message.channel.send(`Je ne trouve pas de channel nommé call-${args2[0]}`)
            if(message.author.id === "176041361714184193") liensteam = "http://steamcommunity.com/id/AzeckoRL/"
+           if(message.author.id === "172456828934946816") liensteam = "http://steamcommunity.com/id/PowA_Tequilaz/"
            var embed = new Discord.MessageEmbed()
            .setThumbnail(message.author.avatarURL())
            .setTimestamp()
