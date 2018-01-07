@@ -138,6 +138,9 @@ function roll() {
            .then(m => m.overwritePermissions(member.guild.roles.find("name", "Admins"), {
             VIEW_CHANNEL: false
            }))
+           .then(m => m.overwritePermissions(member.guild.roles.find("name", "Dank Friends"), {
+            VIEW_CHANNEL: false
+           }))
            .then(m => {
             m.send(`Merci d'attendre un Middleman ${message.author.toString()} et ${user.toString()}, il/elle arrivera le plus vite possible !`)
             var embed = new Discord.MessageEmbed()
