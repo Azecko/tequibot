@@ -149,6 +149,7 @@ bot.on("message", async function(message) {
         message.channel.send("Ce channel sera supprimé dans `10 secondes`.")
         break;
         case "claim":
+        if(message.channel.id != "399618743451516940") return message.delete()
         if (!message.member.roles.find("name", "Middleman")) {
             message.channel.send("Tu as besoin du role `" + "Middleman" + "` pour faire cette commande.");
         return;
