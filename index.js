@@ -26,10 +26,6 @@ function generateHex() {
 
 var roll = Math.floor(Math.random() * 99999) + 1;
 
-function roll() {
-   return Math.floor(Math.random() * 999) + 1;
-}
-
 var fortunes = [
     "Oui.",
     "Non.",
@@ -110,6 +106,9 @@ bot.on("message", async function(message) {
     const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
     switch (args[0].toLowerCase()) {
         case "call":
+function roll() {
+   return Math.floor(Math.random() * 999) + 1;
+}
     if(message.channel.id != "399618686010392587") return message.delete()
         if(!user) {
             message.author.send("Tu as oublié de spécifié ton partenaire de trade.")
