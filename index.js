@@ -26,6 +26,10 @@ function generateHex() {
 
 var roll = Math.floor(Math.random() * 99999) + 1;
 
+function roll() {
+   return Math.floor(Math.random() * 999) + 1;
+}
+
 var fortunes = [
     "Oui.",
     "Non.",
@@ -105,12 +109,18 @@ bot.on("message", async function(message) {
 
     const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
     switch (args[0].toLowerCase()) {
-        case "call":     
-function roll() {
-    return Math.floor(Math.random() * 999) + 1;
- }
-        if(!user) return message.channel.send("Tu n'as pas précisé avec qui tu veux Trade.")
-        if (reason.length < 1) return message.reply("Tu as oublié de précisé l'échange. `Exemple : t;call @Utilisateur 10k pour Slipstream`");
+        case "call":
+    if(message.channel.id != "399618686010392587") return message.delete()
+        if(!user) {
+            message.author.send("Tu as oublié de spécifié ton partenaire de trade.")
+            message.delete()
+            return;
+        }
+        if(!reason) {
+            message.author.send("Tu as oublié de précisé le Trade !")
+            message.delete()
+            return;
+        }
         message.guild.createChannel(`call-${roll()}`, 'text').then(m => m.overwritePermissions(message.author, {
             VIEW_CHANNEL: true
            }))
@@ -121,23 +131,20 @@ function roll() {
             VIEW_CHANNEL: true
            }))
            .then(m => {
-            m.send(`Merci d'attendre un membre du Staff ${message.author.toString()} et ${user.toString()}, une membre du Staff arrivera le plus vite possible !`)
+            m.send(`Merci d'attendre un Middleman ${message.author.toString()} et ${user.toString()}, il/elle arrivera le plus vite possible !`)
             var embed = new Discord.MessageEmbed()
             .setAuthor(message.author.username, message.author.avatarURL)
             .setTimestamp()
             .addField("Numéro de la demande", m.name.split("-").slice(1))
-            .addField("Auteurs de la demande", `${message.author.toString()} et ${user.toString()}`)
+            .addField("Traders", `${message.author.toString()} et ${user.toString()}`)
+            .addField("Trade", `${reason}`)
             .setColor("0x949555")
             member.guild.channels.find("name", "middleman-claim").send(embed)
            })
 
         break;
         case "close":
-        if(!message.channel.name.startsWith("call-")) return message.channel.send("Tu dois être dans un channel d'appel des Middlemans.")
-        if (!message.member.roles.find("name", "Middleman")) {
-            message.channel.send("Tu as besoin du role `" + "Middleman" + "` pour faire cette commande.");
-        return;
-        }
+        if(!message.channel.name.startsWith("call-")) return message.channel.send("Tu dois être dans un channel de call.")
         setTimeout(() => { message.channel.delete() }, 10000);
         message.channel.send("Ce channel sera supprimé dans `10 secondes`.")
         break;
@@ -146,13 +153,17 @@ function roll() {
             message.channel.send("Tu as besoin du role `" + "Middleman" + "` pour faire cette commande.");
         return;
         }
+        let liensteam
            if(!args2[0]) return message.channel.send("Tu as oublié le numéro de la demande.")
            if(!member.guild.channels.find("name", `call-${args2[0]}`)) return message.channel.send(`Je ne trouve pas de channel nommé call-${args2[0]}`)
+           if(message.author.id === "176041361714184193") liensteam = "http://steamcommunity.com/id/AzeckoRL/"
            var embed = new Discord.MessageEmbed()
-           .setImage(message.author.avatarURL)
+           .setThumbnail(message.author.avatarURL())
            .setTimestamp()
-           .addField("Un staff est arrivé !", `Le membre du staff ${message.author.toString()} est arrivé pour t'aider, pose lui ta question !`)
+           .setFooter("Faites attention d'ajouter le Middleman par le lien donner par le bot. Restez prudent !")
+           .addField("Un Middleman est arrivé !", `Le Middleman ${message.author.toString()} est arrivé, il va tout de suite s'occuper de vous !`)
            .setColor("0x3d5ac0")
+           .addField("Lien de son profil Steam", `${liensteam}`)
            member.guild.channels.find("name", `call-${args2[0]}`).overwritePermissions(message.author, {
             VIEW_CHANNEL: true
            })
